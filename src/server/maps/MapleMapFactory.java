@@ -322,7 +322,7 @@ public class MapleMapFactory {
         map.setBoat(mapData.getChildByPath("shipObj") != null);
         map.setTimeLimit(MapleDataTool.getIntConvert("timeLimit", infoData, -1));
         map.setFieldType(MapleDataTool.getIntConvert("fieldType", infoData, 0));
-        map.setMobCapacity(MapleDataTool.getIntConvert("fixedMobCapacity", infoData, 500));//Is there a map that contains more than 500 mobs?
+        map.setMobCapacity(MapleDataTool.getIntConvert("fixedMobCapacity", infoData, 500) );//Is there a map that contains more than 500 mobs?
         
         MapleData recData = infoData.getChildByPath("recovery");
         if (recData != null) {

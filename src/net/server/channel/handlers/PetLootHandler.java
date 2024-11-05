@@ -21,6 +21,8 @@
 */
 package net.server.channel.handlers;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import client.MapleCharacter;
@@ -29,6 +31,7 @@ import client.inventory.MaplePet;
 import net.AbstractMaplePacketHandler;
 import server.maps.MapleMapItem;
 import server.maps.MapleMapObject;
+import server.maps.MapleMapObjectType;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
@@ -80,8 +83,11 @@ public final class PetLootHandler extends AbstractMaplePacketHandler {
                     }
                 }
             }
-
-            chr.pickupItem(ob, petIndex);
+            List<MapleMapObject> list = chr.getMap().getMapObjectsInRange(chr.getPosition(), Double.POSITIVE_INFINITY, Arrays.asList(MapleMapObjectType.ITEM));
+            for (MapleMapObject item : list) {
+                chr.pickupItem(item);
+            }
+//            chr.pickupItem(ob, petIndex);
         } catch (NullPointerException | ClassCastException e) {
             c.announce(MaplePacketCreator.enableActions());
         }

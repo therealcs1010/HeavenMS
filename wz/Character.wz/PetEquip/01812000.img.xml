@@ -12,8 +12,8 @@
     <string name="pickupMeso" value="1"/>
     <string name="pickupItem" value="0"/>
     <string name="pickupOthers" value="0"/>
-    <string name="sweepForDrop" value="0"/>
+    <string name="sweepForDrop" value="1"/>
     <string name="consumeHP" value="0"/>
-    <string name="longRange" value="0"/>
+    <string name="longRange" value="1"/>
   </imgdir>
 </imgdir>

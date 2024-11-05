@@ -160,7 +160,7 @@ public class MapleMap {
     private ScheduledFuture<?> characterStatUpdateTask = null;
     private short itemMonitorTimeout;
     private Pair<Integer, String> timeMob = null;
-    private short mobInterval = 5000;
+    private short mobInterval = 2500;
     private boolean allowSummons = true; // All maps should have this true at the beginning
     private MapleCharacter mapOwner = null;
     private long mapOwnerLastActivityTime = Long.MAX_VALUE;
@@ -3443,7 +3443,7 @@ public class MapleMap {
     }
 
     public void setMobCapacity(int capacity) {
-        this.mobCapacity = capacity;
+        this.mobCapacity = capacity * 2;
     }
 
     public void setBackgroundTypes(HashMap<Integer, Integer> backTypes) {
