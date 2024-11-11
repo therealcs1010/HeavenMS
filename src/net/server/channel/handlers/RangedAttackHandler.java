@@ -34,13 +34,7 @@ import client.inventory.manipulator.MapleInventoryManipulator;
 import config.YamlConfig;
 import constants.game.GameConstants;
 import constants.inventory.ItemConstants;
-import constants.skills.Aran;
-import constants.skills.Buccaneer;
-import constants.skills.NightLord;
-import constants.skills.NightWalker;
-import constants.skills.Shadower;
-import constants.skills.ThunderBreaker;
-import constants.skills.WindArcher;
+import constants.skills.*;
 import server.MapleItemInformationProvider;
 import server.MapleStatEffect;
 import tools.MaplePacketCreator;
@@ -127,6 +121,10 @@ public final class RangedAttackHandler extends AbstractDealDamageHandler {
                         chr.gainMeso(-money, false);
                     }
                 }
+            }
+
+            if (attack.skill == Rogue.LUCKY_SEVEN || attack.skill == Hermit.AVENGER) {
+                bulletCount = 0;
             }
             boolean hasShadowPartner = chr.getBuffedValue(MapleBuffStat.SHADOWPARTNER) != null;
             if (hasShadowPartner) {

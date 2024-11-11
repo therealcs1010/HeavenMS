@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 import config.YamlConfig;
+import constants.skills.*;
 import net.server.Server;
 import provider.MapleData;
 import provider.MapleDataTool;
@@ -60,57 +61,6 @@ import client.inventory.manipulator.MapleInventoryManipulator;
 import client.status.MonsterStatus;
 import client.status.MonsterStatusEffect;
 import constants.inventory.ItemConstants;
-import constants.skills.Aran;
-import constants.skills.Assassin;
-import constants.skills.Bandit;
-import constants.skills.Beginner;
-import constants.skills.Bishop;
-import constants.skills.BlazeWizard;
-import constants.skills.Bowmaster;
-import constants.skills.Brawler;
-import constants.skills.Buccaneer;
-import constants.skills.ChiefBandit;
-import constants.skills.Cleric;
-import constants.skills.Corsair;
-import constants.skills.Crossbowman;
-import constants.skills.Crusader;
-import constants.skills.DarkKnight;
-import constants.skills.DawnWarrior;
-import constants.skills.DragonKnight;
-import constants.skills.Evan;
-import constants.skills.FPArchMage;
-import constants.skills.FPMage;
-import constants.skills.FPWizard;
-import constants.skills.Fighter;
-import constants.skills.GM;
-import constants.skills.Gunslinger;
-import constants.skills.Hermit;
-import constants.skills.Hero;
-import constants.skills.Hunter;
-import constants.skills.ILArchMage;
-import constants.skills.ILMage;
-import constants.skills.ILWizard;
-import constants.skills.Legend;
-import constants.skills.Magician;
-import constants.skills.Marauder;
-import constants.skills.Marksman;
-import constants.skills.NightLord;
-import constants.skills.NightWalker;
-import constants.skills.Noblesse;
-import constants.skills.Outlaw;
-import constants.skills.Page;
-import constants.skills.Paladin;
-import constants.skills.Pirate;
-import constants.skills.Priest;
-import constants.skills.Ranger;
-import constants.skills.Rogue;
-import constants.skills.Shadower;
-import constants.skills.Sniper;
-import constants.skills.Spearman;
-import constants.skills.SuperGM;
-import constants.skills.ThunderBreaker;
-import constants.skills.WhiteKnight;
-import constants.skills.WindArcher;
 import net.server.world.MapleParty;
 import net.server.world.MaplePartyCharacter;
 import server.life.MobSkill;
@@ -491,6 +441,16 @@ public class MapleStatEffect {
         ret.moveTo = MapleDataTool.getInt("moveTo", source, -1);
         Map<MonsterStatus, Integer> monsterStatus = new ArrayMap<>();
         if (skill) {
+            // Sets the attack count here rather than wz edit
+            switch(sourceid) {
+                case Warrior.SLASH_BLAST:
+                    ret.attackCount = 4;
+                    break;
+                default:
+                    break;
+            }
+
+
             switch (sourceid) {
                 // BEGINNER
                 case Beginner.RECOVERY:

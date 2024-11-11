@@ -32,9 +32,13 @@ import constants.skills.Bishop;
 import constants.skills.Evan;
 import constants.skills.FPArchMage;
 import constants.skills.ILArchMage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import server.MapleStatEffect;
+import tools.MapleLogger;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
+import java.util.logging.*;
 
 public final class MagicDamageHandler extends AbstractDealDamageHandler {
 	@Override
@@ -48,7 +52,8 @@ public final class MagicDamageHandler extends AbstractDealDamageHandler {
 		chr.getAutobanManager().spam(8);*/
 
 		AttackInfo attack = parseDamage(slea, chr, false, true);
-                
+		//Log the attack
+
 		if (chr.getBuffEffect(MapleBuffStat.MORPH) != null) {
 			if(chr.getBuffEffect(MapleBuffStat.MORPH).isMorphWithoutAttack()) {
 				// How are they attacking when the client won't let them?

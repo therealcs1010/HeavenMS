@@ -163,6 +163,7 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
                 }
 
                 int mobCount = attackEffect.getMobCount();
+                System.out.println("MOB COUNT : " + mobCount);
                 if (attack.skill != Cleric.HEAL) {
                     if (player.isAlive()) {
                         if(attack.skill == Aran.BODY_PRESSURE || attack.skill == Marauder.ENERGY_CHARGE || attack.skill == ThunderBreaker.ENERGY_CHARGE) {  // thanks IxianMace for noticing Energy Charge skills refreshing on touch
@@ -174,7 +175,6 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
                             attackEffect.applyTo(player, new Point(attack.position.x, attack.position.y));
                         } else {
                             attackEffect.applyTo(player);
-                            
                             if (attack.skill == Page.FINAL_ATTACK_BW || attack.skill == Page.FINAL_ATTACK_SWORD || attack.skill == Fighter.FINAL_ATTACK_SWORD
                                     || attack.skill == Fighter.FINAL_ATTACK_AXE || attack.skill == Spearman.FINAL_ATTACK_SPEAR || attack.skill == Spearman.FINAL_ATTACK_POLEARM
                                     || attack.skill == Hunter.FINAL_ATTACK || attack.skill == Crossbowman.FINAL_ATTACK) {
@@ -244,6 +244,7 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
                 }
             }
             for (Integer oned : attack.allDamage.keySet()) {
+                System.out.println("DAMAGE : " + oned);
                 final MapleMonster monster = map.getMonsterByOid(oned.intValue());
                 if (monster != null) { 
                     double distance = player.getPosition().distanceSq(monster.getPosition());
@@ -568,6 +569,7 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
                     }
                 }
             }
+            System.out.println("");
         } catch (Exception e) {
             e.printStackTrace();
         }
