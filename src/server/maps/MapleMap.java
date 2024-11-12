@@ -63,6 +63,9 @@ import net.server.audit.locks.factory.MonitoredReadLockFactory;
 import net.server.audit.locks.factory.MonitoredReentrantLockFactory;
 import net.server.audit.locks.factory.MonitoredWriteLockFactory;
 import java.lang.ref.WeakReference;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import net.server.Server;
 import net.server.coordinator.world.MapleMonsterAggroCoordinator;
 import net.server.channel.Channel;
@@ -1223,6 +1226,35 @@ public class MapleMap {
             objectRLock.unlock();
         }
         return null;
+    }
+
+    public MapleMonster [] getMonstersByPoint(Point p, int number) {
+        objectRLock.lock();
+        try {
+            Point [] monsterPositionArr = mapobjects.values().stream()
+                    .filter(obj -> obj.getType() == MapleMapObjectType.MONSTER)
+                    .map(MapleMapObject::getPosition)
+                    //Sort based on distance to p in ascending order
+                    .sorted((p1, p2) -> Double.compare(p.distanceSq(p1), p.distanceSq(p2)))
+                    .limit(number)
+                    .toArray(Point []::new);
+
+            return Arrays.stream(monsterPositionArr, 0, number)
+                    .map(this::getMonsterByPosition)
+                    .toArray(MapleMonster []::new);
+        } finally {
+            objectRLock.unlock();
+        }
+    }
+
+    public MapleMonster getMonsterByPosition(Point p) {
+        return mapobjects.values().stream()
+                .filter(obj -> obj.getType() == MapleMapObjectType.MONSTER)
+                //Find any that matches the position p
+                .filter(obj -> obj.getPosition().equals(p))
+                .map(MapleMonster.class::cast)
+                .findFirst()
+                .orElse(null);
     }
 
     public int countMonster(int id) {

@@ -393,6 +393,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
         savedLocations = new SavedLocation[SavedLocationType.values().length];
         
         for (MapleInventoryType type : MapleInventoryType.values()) {
+
             byte b = 24;
             if (type == MapleInventoryType.CASH) {
                 b = 96;
@@ -460,10 +461,10 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
         ret.accountid = c.getAccID();
         ret.buddylist = new BuddyList(20);
         ret.maplemount = null;
-        ret.getInventory(MapleInventoryType.EQUIP).setSlotLimit(24);
-        ret.getInventory(MapleInventoryType.USE).setSlotLimit(24);
-        ret.getInventory(MapleInventoryType.SETUP).setSlotLimit(24);
-        ret.getInventory(MapleInventoryType.ETC).setSlotLimit(24);
+        ret.getInventory(MapleInventoryType.EQUIP).setSlotLimit(96);
+        ret.getInventory(MapleInventoryType.USE).setSlotLimit(96);
+        ret.getInventory(MapleInventoryType.SETUP).setSlotLimit(96);
+        ret.getInventory(MapleInventoryType.ETC).setSlotLimit(96);
         
         // Select a keybinding method
         int[] selectedKey;
@@ -9451,6 +9452,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
         } finally {
             inventory[type].unlockInventory();
         }
+
     }
     
     public int sellAllItemsFromName(byte invTypeId, String name) {
